@@ -5,7 +5,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const API_DOMAIN = process.env.API_DOMAIN || "https://vision-api.truepic.com";
 const AUTH_TOKEN_URL =
   process.env.AUTH_TOKEN_URL ||
-  "https://truepic-vision-dev.auth0.com/oauth/token";
+  "https://truepic-vision-prod.auth0.com/oauth/token";
 
 let access_token = null; // If you have an access token, you can also just set it here too.
 
@@ -43,7 +43,7 @@ export default async function fetchFromVisionAPI(path, params) {
   if (!access_token) {
     await getAccessToken();
   }
-  const url = `${API_DOMAIN}/v2/${path}?${params}`;
+  const url = `${API_DOMAIN}/v2${path}?${params}`;
 
   const response = await fetch(url, {
     method: "GET",
