@@ -53,3 +53,7 @@ implement before setting up this script to run on a regular basis for your compa
 3. After you have downloaded the videos, send them to a different system to be stored.
 
 **Important** Every time the script runs, it deletes all the videos in the downloads folder. Make sure you save them somewhere else before you run the script again.
+
+## License
+
+This library is licensed under the ISC License. See the LICENSE file for more information.

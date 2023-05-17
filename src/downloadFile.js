@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import fs from "fs";
+import https from "https";
 
 var downloadDirectory = "./downloads";
 
@@ -8,7 +9,10 @@ fs.mkdirSync(downloadDirectory);
 
 export default async function downloadFile(url, filename) {
   console.log("Downloading file: " + filename);
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    timeout: 1000 * 60 * 5, // 5 minutes
+    agent: new https.Agent({ keepAlive: true }),
+  });
   const fileStream = fs.createWriteStream(
     `${downloadDirectory}/${filename}.mp4`
   );
