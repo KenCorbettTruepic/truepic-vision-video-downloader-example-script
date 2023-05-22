@@ -15,7 +15,9 @@ try {
       const fullEventData = await getFullEventData(eventId);
       fullEventData.photos
         .filter((photo) => photo.mp4)
-        .forEach(({ id, mp4 }) => videosFromEvents.push({ id, mp4 }));
+        .forEach(({ eventId, id, mp4 }) =>
+          videosFromEvents.push({ eventId, id, mp4 })
+        );
       await new Promise((resolve) => setTimeout(resolve, 500)); // wait 500ms between requests
     }
   );
@@ -27,8 +29,8 @@ try {
   });
 
   console.log(notSavedVideos.length + " videos found.");
-  await asyncForEach(videosFromEvents, async ({ id, mp4 }) => {
-    await downloadFile(mp4, id);
+  await asyncForEach(videosFromEvents, async ({ eventId, id, mp4 }) => {
+    await downloadFile(mp4, `${eventId}-${id}`);
   });
   console.log("Done!");
 } catch (error) {
